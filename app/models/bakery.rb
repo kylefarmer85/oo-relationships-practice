@@ -13,19 +13,12 @@ class Bakery
   end
 
   def ingredients
-    Dessert.all.map do |dessert|
-      if dessert.bakery == self
-        dessert.ingredients
-      end
-    end.compact
+    desserts.select {|dessert|
+      dessert.ingredients }	
   end
 
   def desserts
-    Dessert.all.map do |dessert|
-      if dessert.bakery == self
-        dessert
-      end
-    end.compact
+    Dessert.all.select { |dessert| dessert.bakery == self }
   end
 
   def average_calories
@@ -41,5 +34,5 @@ class Bakery
   def shopping_list
     ingredients.flatten.map {|ingredient| ingredient.name}
   end
-  
+
 end
